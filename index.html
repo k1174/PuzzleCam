@@ -2,58 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Access camera</title>
 </head>
 
 <body onload="main()">
-    <video src=""></video>
-    <canvas id="mycanvas" style="background-color: bisque;"></canvas>
 
-    Hello world
+    <canvas id="mycanvas"></canvas>
     <script src="index.js"></script>
+
 </body>
 
 </html>
-
-
-<!--
-
-Thanks for providing your current understanding. Let's start by breaking down the process into smaller steps and providing guidance for each:
-
-1. **Project Setup**:
-   - Set up a basic HTML file with `<video>` and `<canvas>` elements.
-   - Include a JavaScript file where you'll write your code.
-   - Ensure the HTML file is set up to access your JavaScript file.
-
-2. **Accessing Webcam**:
-   - Learn about the `getUserMedia` API to access the user's webcam.
-   - Implement code to request access to the webcam and display the video stream on the `<video>` element.
-
-3. **Drawing Video Frames**:
-   - Understand how to draw video frames onto the `<canvas>` element.
-   - Write JavaScript code to continuously draw video frames onto the canvas using the `drawImage()` method.
-
-4. **Understanding Chroma Keying**:
-   - Research and understand the concept of chroma keying.
-   - Learn about the specific color range (usually green) that is used as the chroma key.
-
-5. **Defining Chroma Key Color Range**:
-   - Determine the range of colors to be replaced (e.g., green screen color).
-   - Experiment with different color ranges and find the appropriate values for your chroma keying.
-
-6. **Implementing Chroma Keying Algorithm**:
-   - Learn about image manipulation techniques to identify and replace specific colors.
-   - Implement a chroma keying algorithm in JavaScript to replace the green screen color with another background or transparency.
-
-7. **Testing and Debugging**:
-   - Test your implementation with different videos and backgrounds.
-   - Debug any issues and refine your algorithm for better results.
-
-8. **Optimizing and Enhancing**:
-   - Explore ways to optimize your code for better performance.
-   - Experiment with additional features like adding effects or improving the chroma keying accuracy.
-
-Based on these steps, you can start by setting up your project, accessing the webcam, and drawing video frames onto the canvas. As you progress, you can delve into understanding chroma keying and implementing the algorithm. Feel free to ask for clarification or guidance on any specific step!
--->

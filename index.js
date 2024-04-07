@@ -1,22 +1,35 @@
-
-
-const canvas = document.getElementById("mycanvas");
-const ctx = canvas.getContext("2d")
-
-
-
-console.log("working")
-
-//video
 let Video = null
+let canvas = null
+let ctx = null
+
 function main() {
-    
-    let promise = navigator.mediaDevices.getUserMedia({video:true});
+    canvas = document.getElementById("mycanvas")
+    ctx = canvas.getContext("2d")
 
-    promise.then(function(signal){
 
-    }).catch(function(err){
-        alert("Camera error : "+ err);
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+
+    // Request access to user's camera
+    let promise = navigator.mediaDevices.getUserMedia({ video: true });
+
+    promise.then(function (signal) {
+        Video = document.createElement("video")
+        Video.srcObject = signal;
+        Video.play();
+        Video.onloadeddata = function () {
+            updateCanvas();
+        }
+    }).catch(function (err) {
+        alert("Camera error : " + err);
     });
     console.log("main")
+}
+
+//drwa the video upto the canvas
+function updateCanvas() {
+    ctx.drawImage(Video, 0, 0)
+
+    //now to update frame , we will this function recursively
+    window.requestAnimationFrame(updateCanvas)
 }
