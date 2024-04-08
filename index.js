@@ -40,9 +40,33 @@ function main() {
 
 function addEventListeners() {
     canvas.addEventListener("mousedown", onMouseDown)
-    canvas.addEventListener("mouseup", onMouseUP)
+    canvas.addEventListener("mouseup", onMouseUp)
     canvas.addEventListener("mousemove", onMouseMove)
+
+    //mobile version
+    canvas.addEventListener("touchstart", onTouchStart)
+    canvas.addEventListener("touchend", onTouchEnd)
+    canvas.addEventListener("touchmove", onTouchMove)
 }
+
+function onTouchStart(evt){
+    let loc = {
+        x:evt.touches[0].clientX,
+        y:evt.touches[0].clientY
+    }
+    onMouseDown(loc)
+} 
+function onTouchEnd(){
+
+    onMouseUp()
+} 
+function onTouchMove(evt){
+    let loc = {
+        x:evt.touches[0].clientX,
+        y:evt.touches[0].clientY
+    }
+    onMouseMove(loc)
+}   
 
 function onMouseDown(evt) {
     selected_piece = getPressedPiece(evt);
@@ -69,7 +93,7 @@ function onMouseMove(evt) {
     }
 }
 
-function onMouseUP(evt) {
+function onMouseUp() {
     if (selected_piece.isClose()) {
         selected_piece.snap()
     }
