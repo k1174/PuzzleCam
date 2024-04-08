@@ -13,9 +13,6 @@ function main() {
     canvas = document.getElementById("mycanvas")
     ctx = canvas.getContext("2d")
 
-
-
-
     // Request access to user's camera
     let promise = navigator.mediaDevices.getUserMedia({ video: true });
 
@@ -27,7 +24,7 @@ function main() {
 
             handleResize();
             //enable below for responsive
-            // window.addEventListener('resize', handleResize)
+            window.addEventListener('resize', handleResize)
 
             initialisePieces(rows,cols)
             updateCanvas();
@@ -40,7 +37,7 @@ function main() {
 
 //resize happen when tab ratio changes
 function handleResize(){
-    //so this will also resize not just camera screen when chaniging ratio of yab
+    //so this will also resize not just canvas area when chaniging ratio of tab
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 
@@ -62,11 +59,15 @@ function handleResize(){
 
 //drwa the video upto the canvas
 function updateCanvas() {
-    //drawing video is now shifted t pieces !!
-    // ctx.drawImage(Video,
-    //     size.x, size.y,
-    //     size.width, size.height);
+    
+    ctx.clearRect(0,0,canvas.width,canvas.height)
 
+    ctx.globalAlpha = 0.5
+    ctx.drawImage(Video,
+        size.x, size.y,
+        size.width, size.height);
+    
+    ctx.globalAlpha = 1
     //drwaing pieces(cells)
     for(let i=0;i<pieces.length;i++){
         pieces[i].draw(ctx)
@@ -78,7 +79,7 @@ function updateCanvas() {
 
 
 function initialisePieces(row, col){
-    
+
     rows = row;
     cols = col;
     pieces=[]
@@ -86,6 +87,17 @@ function initialisePieces(row, col){
         for(let j=0; j<cols; j++){
             pieces.push(new Piece(i,j))
         }
+    }
+}
+
+function randomizePieces(){
+    for(let i=0; i<pieces.length;i++){
+        let loc = {
+            x:Math.random()*(window.innerWidth - pieces[i].width),
+            y:Math.random()*(window.innerHeight - pieces[i].height)
+        }
+        pieces[i].x=loc.x
+        pieces[i].y=loc.y
     }
 }
 class Piece{
