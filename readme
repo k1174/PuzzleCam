@@ -1,3 +1,25 @@
 1.Accessing user video
 --> https://youtu.be/Z6fQtNpB3hU?si=S8yAhP_IjgYr16U8
+
+
+
 2.Image manipulation
+
+Getting near distance approach : 
+![alt text](image.png)
+def distance(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+def calculate_threshold(p1, p2, fraction):
+    return distance(p1, p2) * fraction
+
+def is_near(p1, p2, fraction):
+    threshold = calculate_threshold(p1, p2, fraction)
+    return distance(p1, p2) <= threshold
+
+# Example usage:
+p1 = (3, 4)
+p2 = (0, 0)
+fraction = 0.5  # Adjust this fraction as needed, for example, 0.5 for half the distance
