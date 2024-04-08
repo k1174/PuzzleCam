@@ -1,0 +1,11 @@
+This tutorial is part 1 of a series that teaches how to code a complex puzzle game that uses the camera:
+Part 1. Accessing camera with HTML and vanilla JavaScript (Desktop and Mobile)
+Part 2. Image manipulation using vanilla JavaScript (Cutting it into Pieces)
+Part 3. Drag and drop using vanilla JavaScript and HTML canvas (Desktop and Mobile)
+Part 4. Gameplay elements (Menu, Timer, Check complete)
+Part 5. Styles and visuals (CSS and vectorial drawing)
+Part 6. Working with sound (Recording and synthesis)
+Part 7. MySql (PhpMyAdmin, Table structure)
+Part 8. Php (Handling HTTP Requests, Interacting with the database)
+Part 9. Advanced image manipulation in vanilla JavaScript (Shaping Puzzle Pieces)
+Part 10. Advanced drag and drop in vanilla JavaScript (Handling Complex Shapes)

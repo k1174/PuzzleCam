@@ -5,6 +5,10 @@ let ctx = null
 let scaler = 0.8 //scaler for video
 let size = { x: 0, y: 0, width: 0, height: 0 }
 
+let rows = 3
+let cols = 3
+let pieces = []
+
 function main() {
     canvas = document.getElementById("mycanvas")
     ctx = canvas.getContext("2d")
@@ -24,6 +28,8 @@ function main() {
             handleResize();
             //enable below for responsive
             // window.addEventListener('resize', handleResize)
+
+            initialisePieces(rows,cols)
             updateCanvas();
         }
     }).catch(function (err) {
@@ -56,11 +62,58 @@ function handleResize(){
 
 //drwa the video upto the canvas
 function updateCanvas() {
+    //drawing video is now shifted t pieces !!
+    // ctx.drawImage(Video,
+    //     size.x, size.y,
+    //     size.width, size.height);
 
-    ctx.drawImage(Video,
-        size.x, size.y,
-        size.width, size.height);
+    //drwaing pieces(cells)
+    for(let i=0;i<pieces.length;i++){
+        pieces[i].draw(ctx)
+    }
 
     //now to update frame , we will this function recursively
     window.requestAnimationFrame(updateCanvas)
+}
+
+
+function initialisePieces(row, col){
+    
+    rows = row;
+    cols = col;
+    pieces=[]
+    for(let i=0; i<rows;i++){
+        for(let j=0; j<cols; j++){
+            pieces.push(new Piece(i,j))
+        }
+    }
+}
+class Piece{
+    constructor(rowIndex,colIndex){
+        this.rowIndex=rowIndex
+        this.colIndex=colIndex
+
+        //calculating starting point of cell()
+        this.x=size.x+size.width*this.colIndex/cols;
+        this.y=size.y+size.height*this.rowIndex/rows;
+
+        this.width=size.width/cols;
+        this.height=size.height/rows;
+    }
+
+    draw(ctx){
+        ctx.beginPath();
+        ctx.drawImage(Video,
+            this.colIndex * Video.videoWidth/cols,
+            this.rowIndex * Video.videoHeight/rows,
+            Video.videoWidth/cols,
+            Video.videoHeight/rows,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        )
+        ctx.rect(this.x,this.y,this.width,this.height)
+        ctx.stroke()
+    }
 }
