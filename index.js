@@ -10,6 +10,8 @@ let cols = 3
 let pieces = []
 
 let selected_piece = null
+let beat = new Audio('/success-fanfare-trumpets-6185.mp3');
+let sound = new Audio('interface-124464.mp3');
 
 function main() {
     canvas = document.getElementById("mycanvas")
@@ -94,8 +96,10 @@ function onMouseMove(evt) {
 }
 
 function onMouseUp() {
-    if (selected_piece.isClose()) {
-        selected_piece.snap()
+    if(selected_piece != null){
+        if (selected_piece.isClose()) {
+            selected_piece.snap()
+        }
     }
     selected_piece = null
 }
@@ -224,7 +228,22 @@ class Piece {
         this.x = this.xCorrect
 
         this.y = this.yCorrect
+        if(checkComplete()){
+            beat.play()
+            return
+        }
+        sound.play()
     }
+}
+
+function checkComplete(){
+    for(let i=0; i<pieces.length;i++){
+        let cell = pieces[i]
+        if(cell.x != cell.xCorrect || cell.y != cell.yCorrect){
+            return false
+        }
+    }
+    return true
 }
 
 function distance(p1, p2) {
@@ -236,3 +255,35 @@ function distance(p1, p2) {
 
 
 
+let diff =  document.getElementById("difficulty")
+diff.addEventListener("change",() => {
+    let difficulty = diff.value
+    switch(difficulty) {
+        case 'Easy' :
+            rows = 3;
+            cols = 3;
+
+            break
+        case 'Medium' :
+            rows = 6;
+            cols = 6;
+            break;
+        case 'Hard' :
+            rows = 9;
+            cols = 9;
+            break;
+        case 'Legend' :
+            rows = 12;
+            cols = 12;
+            break
+
+        default:
+            console.log(difficulty)
+    }
+    initialisePieces(rows, cols)
+    console.log(difficulty)
+})
+
+function reset(){
+    randomizePieces()
+}
