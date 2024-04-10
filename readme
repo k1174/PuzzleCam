@@ -23,3 +23,6 @@ def is_near(p1, p2, fraction):
 p1 = (3, 4)
 p2 = (0, 0)
 fraction = 0.5  # Adjust this fraction as needed, for example, 0.5 for half the distance
+
+
+check

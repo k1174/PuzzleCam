@@ -10,7 +10,7 @@ let cols = 3
 let pieces = []
 
 let selected_piece = null
-let beat = new Audio('/success-fanfare-trumpets-6185.mp3');
+let beat = new Audio('success-fanfare-trumpets-6185.mp3');
 let sound = new Audio('interface-124464.mp3');
 
 function main() {
